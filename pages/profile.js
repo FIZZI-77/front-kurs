@@ -46,7 +46,7 @@ export default function Profile() {
       <div className="flex items-center mb-8">
         <div className="relative w-32 h-32 rounded-full overflow-hidden bg-gray-200">
           {image ? (
-            <img src={image} alt="Profile" className="w-full h-full object-cover" />
+            <Image src={image} alt="Profile" className="w-full h-full object-cover" />
           ) : (
             <BsFillCameraFill className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl text-gray-600" />
           )}

@@ -82,19 +82,19 @@ export default function Home() {
             <h1 className="text-xl font-burtons dark:text-white">Day Planner</h1>
             <ul className="flex items-center">
               <li className="mr-5">
-                <a href="/settings" className="text-teal-600 dark:text-teal-400">
+                <Link href="/settings" className="text-teal-600 dark:text-teal-400">
                   Settings
-                </a>
+                </Link>
               </li>
               <li className="mr-5">
-                <a href="/analytics" className="text-teal-600 dark:text-teal-400">
+                <Link href="/analytics" className="text-teal-600 dark:text-teal-400">
                   Analytics
-                </a>
+                </Link>
               </li>
               <li className="mr-5">
-                <a href="/profile" className="text-teal-600 dark:text-teal-400">
+                <Link href="/profile" className="text-teal-600 dark:text-teal-400">
                   Profile
-                </a>
+                </Link>
               </li>
               {!darkMode ? (
                 <li>
