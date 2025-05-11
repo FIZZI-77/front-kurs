@@ -11,56 +11,104 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-   
+      # 1. Checkout кода из репозитория
       - name: ✅ Checkout code
         uses: actions/checkout@v3
 
-    
+      # 2. Установка Node.js
       - name: 🟢 Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-   
+      # 3. Установка зависимостей
       - name: 📦 Install dependencies
         run: npm install
 
   lint:
     runs-on: ubuntu-latest
-    needs: build  
+    needs: build  # Линтинг выполняется только после установки зависимостей
 
     steps:
-
+      # 1. Checkout кода из репозитория
       - name: ✅ Checkout code
         uses: actions/checkout@v3
 
+      # 2. Установка Node.js
       - name: 🟢 Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-
+      # 3. Установка зависимостей
       - name: 📦 Install dependencies
         run: npm install
 
+
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint  # Тестирование выполняется только после успешного линтинга
+
+    steps:
+      # 1. Checkout кода из репозитория
+      - name: ✅ Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Установка Node.js
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3. Установка зависимостей
+      - name: 📦 Install dependencies
+        run: npm install
+
+      # 4. Запуск тестов
+      - name: 🧪 Run tests
+        run: npm test
+
+  build_prod:
+    runs-on: ubuntu-latest
+    needs: test  # Сборка выполняется только после успешных тестов
+
+    steps:
+      # 1. Checkout кода из репозитория
+      - name: ✅ Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Установка Node.js
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3. Установка зависимостей
+      - name: 📦 Install dependencies
+        run: npm install
+
+      # 4. Сборка проекта
+      - name: 🛠️ Build project
+        run: npm run build
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build  
+    needs: build_prod  # Деплой выполняется только после успешной сборки
 
     steps:
-
+      # 1. Checkout кода из репозитория
       - name: ✅ Checkout code
         uses: actions/checkout@v3
 
-
+      # 2. Установка Node.js
       - name: 🟢 Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-
+      # 3. Установка зависимостей
       - name: 📦 Install dependencies
         run: npm install
 
-    
+
