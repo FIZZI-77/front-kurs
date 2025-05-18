@@ -75,9 +75,7 @@ export default function Analytics() {
 
             {/* Кнопка возврата */}
             <Link href="/">
-              <Link className="text-blue-500 hover:text-blue-700 mb-4 inline-block">
-                Назад
-              </Link>
+              <a className="text-blue-500 hover:text-blue-700 mb-4 inline-block">Назад</a>
             </Link>
 
             {/* Выпадающий список для выбора года */}

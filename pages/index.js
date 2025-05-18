@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+import Link from 'next/link';
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 
