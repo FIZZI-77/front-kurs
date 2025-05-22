@@ -93,6 +93,12 @@ export default function Home() {
                 </Link>
               </li>
               <li className="mr-5">
+                <Link href="/calendar" className="text-teal-600 dark:text-teal-400">
+                  Calendar
+                </Link>
+              </li>
+
+              <li className="mr-5">
                 <Link href="/profile" className="text-teal-600 dark:text-teal-400">
                   Profile
                 </Link>
