@@ -120,10 +120,10 @@ export default function Home() {
           </nav>
           <div className="text-center p-10">
             <h2 className="text-5xl text-teal-600 font-medium md:text-6xl">
-              Work Day Scheduler
+              Планировщик расписания рабочего дня
             </h2>
             <h3 className="text-2xl py-2 md:text-3xl dark:text-white">
-              A simple calendar app for scheduling your work day
+              Простое приложение-календарь для планирования вашего рабочего дня
             </h3>
             <p className="text-lg font-semibold py-5 leading-8 text-gray-800 md:text-xl max-w-lg mx-auto dark:text-white">
               {getDate()}

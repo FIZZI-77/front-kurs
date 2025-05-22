@@ -3,10 +3,10 @@ import { BsFillCameraFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 
 export default function Profile() {
-  const [firstName, setFirstName] = useState("John");
-  const [lastName, setLastName] = useState("Doe");
-  const [email, setEmail] = useState("johndoe@example.com");
-  const [bio, setBio] = useState("A software developer with a passion for coding.");
+  const [firstName, setFirstName] = useState("Fedor");
+  const [lastName, setLastName] = useState("Zaprudnov");
+  const [email, setEmail] = useState("zaprudnovfedor@gmail.com");
+  const [bio, setBio] = useState("Студент направления програмной инженерии в МИРЭА");
   const [image, setImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false); // Добавляем состояние для редактирования
 
