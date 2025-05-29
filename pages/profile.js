@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BsFillCameraFill } from "react-icons/bs";
 import { useRouter } from "next/router";
+import Image from 'next/image';
 
 export default function Profile() {
   const [firstName, setFirstName] = useState("Fedor");
