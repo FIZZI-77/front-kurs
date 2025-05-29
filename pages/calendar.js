@@ -163,7 +163,7 @@ export default function CalendarView() {
             >
               <span className="dark:text-white">{task.events}</span>
               <span className="text-sm text-gray-500 dark:text-gray-300">
-                ⏰ {task.time}
+                ⏰ {`${task.startTime} - ${task.endTime}`}
               </span>
             </li>
           ))}

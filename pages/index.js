@@ -91,22 +91,22 @@ export default function Home() {
             <ul className="flex items-center">
               <li className="mr-5">
                 <Link href="/settings" className="text-teal-600 dark:text-teal-400">
-                  Settings
+                  Настройки
                 </Link>
               </li>
               <li className="mr-5">
                 <Link href="/analytics" className="text-teal-600 dark:text-teal-400">
-                  Analytics
+                  Аналитика
                 </Link>
               </li>
               <li className="mr-5">
                 <Link href="/calendar" className="text-teal-600 dark:text-teal-400">
-                  Calendar
+                  Календарь
                 </Link>
               </li>
               <li className="mr-5">
                 <Link href="/profile" className="text-teal-600 dark:text-teal-400">
-                  Profile
+                  Профиль
                 </Link>
               </li>
               {!darkMode ? (
@@ -220,16 +220,16 @@ export default function Home() {
                     Id
                   </th>
                   <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-                    Date
+                    Дата
                   </th>
                   <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-                    Time
+                    Время
                   </th>
                   <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-                    Event
+                    Задача
                   </th>
                   <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-                    Actions
+                    Действие
                   </th>
                 </tr>
               </thead>

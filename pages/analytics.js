@@ -109,13 +109,13 @@ export default function Analytics() {
                       Id
                     </th>
                     <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-                      Date
+                      Дата
                     </th>
                     <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-                      Time
+                      Время
                     </th>
                     <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-                      Event
+                      Задача
                     </th>
                   </tr>
                 </thead>
@@ -124,7 +124,7 @@ export default function Analytics() {
                     <tr key={entry.id} className="bg-gray-300 border border-grey-500 md:border-none block md:table-row dark:bg-gray-800 dark:text-white">
                       <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{entry.id}</td>
                       <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{entry.date}</td>
-                      <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{entry.time}</td>
+                      <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{`${entry.startTime} - ${entry.endTime}`}</td>
                       <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{entry.events}</td>
                     </tr>
                   ))}

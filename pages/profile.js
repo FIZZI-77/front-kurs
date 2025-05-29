@@ -35,13 +35,13 @@ export default function Profile() {
 
   return (
     <div className="bg-white px-10 py-10 dark:bg-gray-900">
-      <h1 className="text-3xl font-bold mb-5 dark:text-white">Profile</h1>
+      <h1 className="text-3xl font-bold mb-5 dark:text-white">Профиль</h1>
 
       <button
         onClick={handleBack}
         className="bg-teal-600 text-white py-2 px-4 rounded-md mb-6"
       >
-        Back
+        Назад
       </button>
 
       <div className="flex items-center mb-8">
@@ -67,7 +67,7 @@ export default function Profile() {
 
       <div className="mb-6">
         <label htmlFor="firstName" className="block text-lg font-medium dark:text-white">
-          First Name
+          Имя
         </label>
         <input
           id="firstName"
@@ -82,7 +82,7 @@ export default function Profile() {
 
       <div className="mb-6">
         <label htmlFor="lastName" className="block text-lg font-medium dark:text-white">
-          Last Name
+          Фамилия
         </label>
         <input
           id="lastName"
@@ -97,7 +97,7 @@ export default function Profile() {
 
       <div className="mb-6">
         <label htmlFor="bio" className="block text-lg font-medium dark:text-white">
-          Bio
+          О себе
         </label>
         <textarea
           id="bio"
@@ -112,7 +112,7 @@ export default function Profile() {
 
       <div className="mb-6">
         <label htmlFor="email" className="block text-lg font-medium dark:text-white">
-          Email
+          Почта
         </label>
         <input
           id="email"
@@ -130,14 +130,14 @@ export default function Profile() {
           onClick={handleSaveChanges}
           className="bg-teal-600 text-white py-2 px-4 rounded-md"
         >
-          Save Changes
+          Сохранить изменения
         </button>
       ) : (
         <button
           onClick={handleEditProfile}
           className="bg-teal-600 text-white py-2 px-4 rounded-md"
         >
-          Edit Profile
+          Изменить профиль
         </button>
       )}
     </div>
