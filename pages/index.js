@@ -4,22 +4,38 @@ import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import Link from 'next/link';
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [entry, setEntry] = useState([]);
   const [events, setEvents] = useState("");
-  const [time, setTime] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [timeError, setTimeError] = useState("");
 
-  const handleSetEntries = async () => {
+  const handleSetEntries = () => {
+    if (!startTime || !endTime) {
+      setTimeError("Пожалуйста, выберите время начала и окончания");
+      return;
+    }
+    if (endTime <= startTime) {
+      setTimeError("Время окончания должно быть позже времени начала");
+      return;
+    }
+    setTimeError("");
+
     const dateString = selectedDate.toLocaleDateString();
     let entries = [
       ...entry,
       {
         id: entry.length + 1,
         events: events,
-        time: time,
+        startTime: startTime,
+        endTime: endTime,
         date: dateString,
       },
     ];
@@ -36,7 +52,8 @@ export default function Home() {
 
   const handleReset = () => {
     setEvents("");
-    setTime("");
+    setStartTime("");
+    setEndTime("");
   };
 
   const setData = () => {
@@ -50,18 +67,8 @@ export default function Home() {
 
   const getDate = () => {
     const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December",
     ];
     let monthIndex = new Date().getMonth();
     let monthName = monthNames[monthIndex];
@@ -97,7 +104,6 @@ export default function Home() {
                   Calendar
                 </Link>
               </li>
-
               <li className="mr-5">
                 <Link href="/profile" className="text-teal-600 dark:text-teal-400">
                   Profile
@@ -106,18 +112,14 @@ export default function Home() {
               {!darkMode ? (
                 <li>
                   <BsFillMoonStarsFill
-                    onClick={() => {
-                      setDarkMode(!darkMode);
-                    }}
+                    onClick={() => setDarkMode(!darkMode)}
                     className="cursor-pointer text-2xl"
                   />
                 </li>
               ) : (
                 <li>
                   <BsFillSunFill
-                    onClick={() => {
-                      setDarkMode(!darkMode);
-                    }}
+                    onClick={() => setDarkMode(!darkMode)}
                     className="cursor-pointer text-2xl text-white"
                   />
                 </li>
@@ -138,36 +140,79 @@ export default function Home() {
         </section>
 
         <section className="min-h-screen">
-          <div className="flex justify-between items-center mb-44 p-8 shadow-lg bg-slate-300 rounded-xl dark:bg-gray-800">
-            <Calendar
-              onChange={setSelectedDate}
-              value={selectedDate}
-            />
-            <input
-              type="time"
-              className="dark:bg-gray-800 dark:text-white"
-              placeholder="time"
-              value={time}
-              onChange={(e) => {
-                setTime(e.target.value);
-              }}
-            />
-            <input
-              className="w-1/2 h-10 rounded-md border-2 border-gray-300 dark:bg-gray-800 dark:text-white"
-              placeholder="Eat, Sleep, Code"
-              value={events}
-              onChange={(e) => {
-                setEvents(e.target.value);
-              }}
-            />
-            <button
-              className="bg-teal-600 text-white px-4 py-2 rounded-md"
-              onClick={() => handleSetEntries()}
-            >
-              Save
-            </button>
+        <div className="flex flex-col md:flex-row justify-between items-center mb-44 p-3 md:p-4 shadow-lg bg-slate-300 rounded-xl dark:bg-gray-800 gap-8 max-w-4xl mx-auto">
+            {/* Обёртка для календаря и времени */}
+            <div className="flex flex-col items-center gap-6">
+              <h3 className="text-xl font-semibold dark:text-white mb-4">
+                Выберите дату и время
+              </h3>
+              <Calendar
+                onChange={setSelectedDate}
+                value={selectedDate}
+                className="max-w-xs"
+              />
+            </div>
+
+             {/* Блок выбора времени и событий */}
+            <div className="flex flex-col items-center gap-6 w-full md:w-auto">
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <div className="flex flex-col items-center">
+                  <label className="mb-2 font-semibold dark:text-white flex items-center gap-2">
+                    <BsFillSunFill /> Время начала
+                  </label>
+                  <TimePicker
+                    onChange={setStartTime}
+                    value={startTime}
+                    disableClock={true}
+                    clearIcon={null}
+                    clockIcon={null}
+                    className="dark:bg-gray-700 dark:text-white rounded-md"
+                  />
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <label className="mb-2 font-semibold dark:text-white flex items-center gap-2">
+                    <BsFillMoonStarsFill /> Время конца
+                  </label>
+                  <TimePicker
+                    onChange={setEndTime}
+                    value={endTime}
+                    disableClock={true}
+                    clearIcon={null}
+                    clockIcon={null}
+                    className="dark:bg-gray-700 dark:text-white rounded-md"
+                  />
+                </div>
+              </div>
+
+              <input
+                type="text"
+                className="w-full md:w-64 h-10 rounded-md border-2 border-gray-300 dark:bg-gray-800 dark:text-white px-3"
+                placeholder="Введите событие"
+                value={events}
+                onChange={(e) => setEvents(e.target.value)}
+              />
+
+              <div className="flex gap-4">
+                <button
+                  className="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 transition whitespace-nowrap"
+                  onClick={handleSetEntries}
+                >
+                  Сохранить
+                </button>
+                <button
+                  className="bg-gray-400 text-gray-800 px-6 py-2 rounded-md hover:bg-gray-500 transition whitespace-nowrap"
+                  onClick={handleReset}
+                >
+                  Сбросить
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="flex justify-between items-center mb-44 p-8 shadow-lg bg-slate-300 rounded-xl dark:bg-gray-800">
+          {timeError && (
+            <p className="text-red-600 text-center mb-6">{timeError}</p>
+          )}
+          <div className="flex justify-between items-center mb-44 p-8 shadow-lg bg-slate-300 rounded-xl dark:bg-gray-800 overflow-x-auto">
             <table className="min-w-full border-collapse block md:table">
               <thead className="block md:table-header-group">
                 <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative dark:bg-gray-800 dark:text-white">
@@ -189,16 +234,21 @@ export default function Home() {
                 </tr>
               </thead>
               {entry.map((item) => (
-                <tbody key={item.id} className="block md:table-row-group dark:bg-gray-800 dark:text-white">
+                <tbody
+                  key={item.id}
+                  className="block md:table-row-group dark:bg-gray-800 dark:text-white"
+                >
                   <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row dark:bg-gray-800 dark:text-white">
                     <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{item.id}</td>
                     <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{item.date}</td>
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{item.time}</td>
+                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
+                      {item.startTime} - {item.endTime}
+                    </td>
                     <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">{item.events}</td>
                     <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded"
+                        className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition"
                       >
                         Delete
                       </button>
@@ -210,6 +260,40 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      <style jsx global>{`
+        .react-calendar {
+          border: none;
+          background-color: transparent;
+          font-family: Arial, sans-serif;
+          width: 100%;
+          max-width: 400px;
+        }
+        .react-calendar__tile {
+          padding: 10px;
+          background: #e0f2f1;
+          color: #00695c;
+          border-radius: 6px;
+          margin: 4px;
+        }
+        .react-calendar__tile--active {
+          background: #004d40;
+          color: white;
+          border-radius: 6px;
+        }
+        .react-time-picker__wrapper {
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          padding: 6px 10px;
+          background-color: #f9fafb;
+          width: 140px;
+        }
+        .dark .react-time-picker__wrapper {
+          background-color: #374151;
+          border-color: #4b5563;
+          color: white;
+        }
+      `}</style>
     </div>
   );
 }
